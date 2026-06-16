@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sales Analytics</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f5f5f5;
+        }
+
+        .box {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h1 {
+            color: teal;
+        }
+
+        h2 {
+            color: green;
+        }
+
+        .card {
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background: teal;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>Sales Analytics Dashboard</h1>
+
+        <div class="card">
+            <h2>Total Orders</h2>
+            <h3>{{ total_orders }}</h3>
+        </div>
+
+        <div class="card">
+            <h2>Total Revenue</h2>
+            <h3>₹{{ total_revenue }}</h3>
+        </div>
+
+        <div class="card">
+            <h2>Total Customers</h2>
+            <h3>{{ total_customers }}</h3>
+        </div>
+
+        <div class="card">
+            <h2>Average Order Value</h2>
+            <h3>₹{{ average_order }}</h3>
+        </div>
+
+        <a href="/dashboard">
+            <button>Back To Dashboard</button>
+        </a>
+
+    </div>
+
+</body>
+
+</html>

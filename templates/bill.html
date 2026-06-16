@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bill</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            text-align: center;
+        }
+
+        .bill-box {
+            width: 70%;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h1 {
+            color: teal;
+        }
+
+        .item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total {
+            color: green;
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        button {
+            background: teal;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="bill-box">
+
+        <h1>Ramya Super Market</h1>
+
+        <h2>Final Bill</h2>
+
+        <p><b>Customer :</b> {{ username }}</p>
+
+        <p>
+            <b>Date :</b>
+            {{ date.strftime('%d-%m-%Y %I:%M %p') }}
+        </p>
+
+        <hr>
+
+        {% for item in cart %}
+
+        <div class="item">
+
+            <h3>{{ item.name }}</h3>
+
+            <p>Price : ₹{{ item.price }}</p>
+
+            <p>Quantity : {{ item.quantity }}</p>
+
+            <p>Subtotal : ₹{{ item.subtotal }}</p>
+
+        </div>
+
+        {% endfor %}
+
+        <h2 class="total">
+            Total = ₹{{ total }}
+        </h2>
+
+        <br>
+
+        <a href="/cart">
+            <button>Back To Cart</button>
+        </a>
+
+        <a href="/download_bill">
+            <button>
+                Download PDF Bill
+            </button>
+        </a>
+
+        <a href="/cart">
+            <button>
+                Back To Cart
+            </button>
+        </a>
+
+        <button onclick="window.print()">
+            Print Bill
+        </button>
+
+    </div>
+
+</body>
+
+</html>

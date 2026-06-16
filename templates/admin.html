@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Panel</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        h1 {
+            color: teal;
+        }
+
+        .box {
+            width: 70%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: 200px;
+        }
+
+        button {
+            background: teal;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background: teal;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Admin Panel</h1>
+
+    <div class="box">
+
+        <h2>Add Product</h2>
+
+        <form action="/add_product" method="POST">
+
+            <input type="text" name="name" placeholder="Product Name" required>
+
+            <input type="number" name="price" placeholder="Price" required>
+
+            <input type="text" name="image" placeholder="images/Rice.jpg" required>
+
+            <input type="text" name="category" placeholder="Category" required>
+
+            <br><br>
+
+            <button type="submit">
+                Add Product
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h2>Product List</h2>
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+
+            {% for product in products %}
+
+            <tr>
+
+                <td>{{ product.id }}</td>
+
+                <td>{{ product.name }}</td>
+
+                <td>₹{{ product.price }}</td>
+
+                <td>{{ product.category }}</td>
+
+                <td>
+
+                    <a href="/delete_product/{{ product.id }}">
+
+                        <button>
+                            Delete
+                        </button>
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>

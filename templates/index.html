@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramya Super Market</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <h1>Ramya Super Market</h1>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/login">Login</a>
+            <a href="/signup">Signup</a>
+            <a href="/cart">Cart</a>
+
+            <button class="btn" onclick="darkMode()">
+                Dark Mode
+            </button>
+        </div>
+    </nav>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/cart">Cart</a>
+
+        <a href="/logout" onclick="return confirm('Logout?')">
+            Logout
+        </a>
+
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h2>Welcome To Ramya Super Market</h2>
+        <p>Best Grocery Products At Low Prices</p>
+    </section>
+
+    <!-- PRODUCTS -->
+    <div class="products">
+
+        <!-- Rice -->
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/Rice.webp') }}" alt="Rice">
+
+            <div class="card-content">
+                <h3>Rice</h3>
+                <p class="price">₹20/kg</p>
+
+                <form action="/add_to_cart/1" method="POST">
+
+                    <input type="number" name="quantity" value="1" min="1">
+
+                    <br><br>
+
+                    <button type="submit" class="btn">
+                        Add To Cart
+                    </button>
+
+                </form>
+
+                <button class="btn">Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Sugar -->
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/Sugar.webp') }}" alt="Sugar">
+
+            <div class="card-content">
+                <h3>Sugar</h3>
+                <p class="price">₹30/kg</p>
+
+                <form action="/add_to_cart/2" method="POST">
+
+                    <input type="number" name="quantity" value="1" min="1">
+
+                    <br><br>
+
+                    <button type="submit" class="btn">
+                        Add To Cart
+                    </button>
+
+                </form>
+                <a href="/buy_now/2"></a>
+
+                <button class="btn">Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Oil -->
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/Oil.webp') }}" alt="Oil">
+
+            <div class="card-content">
+                <h3>Oil</h3>
+                <p class="price">₹80/liter</p>
+
+                <form action="/add_to_cart/3" method="POST">
+
+                    <input type="number" name="quantity" value="1" min="1">
+
+                    <br><br>
+
+                    <button type="submit" class="btn">
+                        Add To Cart
+                    </button>
+
+                </form>
+                <a href="/buy_now/3"></a>
+                <button class="btn">Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Chocolate -->
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/Chocolate.webp') }}" alt="Chocolate">
+
+            <div class="card-content">
+                <h3>Chocolate</h3>
+                <p class="price">₹60</p>
+
+                <form action="/add_to_cart/4" method="POST">
+
+                    <input type="number" name="quantity" value="1" min="1">
+
+                    <br><br>
+
+                    <button type="submit" class="btn">
+                        Add To Cart
+                    </button>
+
+                </form>
+
+                <a href="/buy_now/4"></a>
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

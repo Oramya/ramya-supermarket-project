@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #1e3a5f;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+nav {
+    background: #131921;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+nav h1 {
+    color: #00ffae;
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+nav a:hover {
+    color: #00ffae;
+}
+
+/* HERO SECTION */
+
+.hero {
+    background: linear-gradient(to right, #141e30, #243b55);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h2 {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 22px;
+}
+
+/* PRODUCTS SECTION */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 30px;
+}
+
+/* PRODUCT CARD */
+
+.card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* PRODUCT IMAGE */
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* CARD CONTENT */
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+/* PRICE */
+
+.price {
+    color: green;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* BUTTONS */
+
+.btn {
+    background: #00b894;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background: #019875;
+}
+
+/* DARK MODE */
+
+.dark {
+    background: #121212;
+    color: white;
+}
+
+.dark nav {
+    background: #000;
+}
+
+.dark .hero {
+    background: linear-gradient(to right, #000000, #232526);
+}
+
+.dark .card {
+    background: #1e1e1e;
+    color: white;
+}
+
+.dark .price {
+    color: #00ff7f;
+}
+
+/* FOOTER */
+
+footer {
+    background: #131921;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}

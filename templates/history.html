@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Purchase History</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        table {
+            margin: auto;
+            width: 70%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        th {
+            background: teal;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Purchase History</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Total Amount</th>
+            <th>Date</th>
+        </tr>
+
+        {% for purchase in purchases %}
+        <tr>
+            <td>{{ purchase.id }}</td>
+            <td>{{ purchase.total }}</td>
+            <td>{{ purchase.date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <tr>
+        <th>ID</th>
+        <th>Total Amount</th>
+        <th>Date</th>
+    </tr>
+
+    {% for purchase in purchases %}
+
+    <tr>
+        <td>{{ purchase.id }}</td>
+        <td>₹{{ purchase.total }}</td>
+        <td>{{ purchase.date }}</td>
+    </tr>
+
+    {% endfor %}
+
+    </table>
+
+    <br>
+
+    <a href="/dashboard">
+        <button>Back To Dashboard</button>
+    </a>
+
+</body>
+
+</html>
