@@ -5,9 +5,14 @@ from flask import Flask, render_template, request, redirect, session
 from flask import send_file
 from reportlab.pdfgen import canvas
 from datetime import datetime
+import os
+from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
+UPLOAD_FOLDER = 'static/images'
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.secret_key = "ramya"
 
@@ -35,6 +40,19 @@ class Purchase(db.Model):
     total = db.Column(db.Integer)
 
     date = db.Column(db.String(100))
+
+#PRODUCT TABLE
+class Product(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    name = db.Column(db.String(100))
+
+    price = db.Column(db.Integer)
+
+    image = db.Column(db.String(100))
+
+    category = db.Column(db.String(100)) 
 # PRODUCTS
 products = [
 
@@ -43,7 +61,8 @@ products = [
         "name": "Rice",
         "price": 20,
         "image": "rice.webp",
-        "category": "Grocery"
+        "category": "Grocery",
+        "stock": 100
     },
 
     {
@@ -51,7 +70,8 @@ products = [
         "name": "Sugar",
         "price": 30,
         "image": "Sugar.webp",
-        "category": "Grocery"
+        "category": "Grocery",
+        "stock": 90
     },
 
     {
@@ -59,7 +79,8 @@ products = [
         "name": "Oil",
         "price": 80,
         "image": "Oil.webp",
-        "category": "Grocery"
+        "category": "Grocery",
+        "stock": 200   
     },
 
     {
@@ -67,7 +88,8 @@ products = [
         "name": "Chocolate",
         "price": 60,
         "image": "Chocolate.webp",
-        "category": "Snacks"
+        "category": "Snacks",
+        "stock": 50
     },
 
     {
@@ -75,14 +97,16 @@ products = [
     "name": "Milk",
     "price": 30,
     "image": "milk.webp",
-    "category": "Dairy"
+    "category": "Dairy",
+    "stock": 100
     },
     {
     "id": 6,
     "name": "Eggs",
     "price": 70,
     "image": "eggs.webp",
-    "category": "Dairy"
+    "category": "Dairy",
+    "stock": 80
     },
 
     {
@@ -90,7 +114,8 @@ products = [
     "name": "Bread",
     "price": 40,
     "image": "bread.webp",
-    "category": "Bakery"
+    "category": "Bakery",
+    "stock": 120
     },
 
     {
@@ -98,7 +123,8 @@ products = [
     "name": "Jam",
     "price": 60,
     "image": "jam.webp",
-    "category": "Grocery"
+    "category": "Grocery",
+    "stock": 90
     },
 
     {
@@ -106,7 +132,8 @@ products = [
     "name": "Honey",
     "price": 120,
     "image": "honey.webp",
-    "category": "Grocery"
+    "category": "Grocery",
+    "stock": 70
     },
 
 
@@ -115,7 +142,8 @@ products = [
     "name": "Almond Seeds",
     "price": 250,
     "image": "almond_seeds.webp",
-    "category": "Dry Fruits"
+    "category": "Dry Fruits",
+    "stock": 60 
     },
 
     {
@@ -123,7 +151,8 @@ products = [
     "name": "Cashew",
     "price": 300,
     "image": "cashew.webp",
-    "category": "Dry Fruits"
+    "category": "Dry Fruits",
+    "stock": 50 
     },
 
     {
@@ -131,7 +160,8 @@ products = [
     "name": "Pistha",
     "price": 350,
     "image": "pistha.webp",
-    "category": "Dry Fruits"
+    "category": "Dry Fruits",
+    "stock": 100    
     },
 
     {
@@ -139,7 +169,8 @@ products = [
     "name": "Walnuts",
     "price": 400,
     "image": "walnuts.webp",
-    "category": "Dry Fruits"
+    "category": "Dry Fruits",
+    "stock": 80
     },
 
     {
@@ -147,21 +178,25 @@ products = [
     "name": "Cool Drinks",
     "price": 40,
     "image": "cool_drinks.webp",
-    "category": "Beverages"
+    "category": "Beverages",
+    "stock": 200  
+    
     },
     {
     "id": 15,
     "name": "Tomato",
     "price": 25,
     "image": "tomato.webp",
-    "category": "Vegetables"
+    "category": "Vegetables",
+    "stock": 267
     },
     {
     "id": 16,
     "name": "Brinjal",
     "price": 40,
     "image": "brinjal.webp",
-    "category": "Vegetables"
+    "category": "Vegetables",
+    "stock": 249
     },
 
     {
@@ -169,7 +204,8 @@ products = [
     "name": "Cheese",
     "price": 120,
     "image": "cheese.webp",
-    "category": "Dairy"
+    "category": "Dairy",
+    "stock": 289
     },
 
     {
@@ -177,7 +213,8 @@ products = [
     "name": "Curry Leaves",
     "price": 10,
     "image": "curry_leaves.webp",
-    "category": "Vegetables"
+    "category": "Vegetables",
+    "stock": 200  
     },
 
     {
@@ -185,7 +222,8 @@ products = [
     "name": "Fashion Saree",
     "price": 1500,
     "image": "fashion_saree.webp",
-    "category": "Fashion"
+    "category": "Fashion",
+    "stock": 200  
     },
 
     {
@@ -193,7 +231,8 @@ products = [
     "name": "Ice Cream",
     "price": 80,
     "image": "ice_cream.webp",
-    "category": "Frozen Foods"
+    "category": "Frozen Foods",
+    "stock": 200  
     },
 
     {
@@ -201,7 +240,8 @@ products = [
     "name": "Biscuit",
     "price": 25,
     "image": "biscuit.webp",
-    "category": "Snacks"
+    "category": "Snacks",
+    "stock": 200  
     },
 
     {
@@ -209,7 +249,8 @@ products = [
     "name": "Chilli Powder",
     "price": 90,
     "image": "chilli_powder.webp",
-    "category": "Grocery"
+    "category": "Grocery",
+    "stock": 200  
     },
 
     {
@@ -217,7 +258,8 @@ products = [
     "name": "Cotton Sarees",
     "price": 1200,
     "image": "cotton_saress.webp",
-    "category": "Fashion"
+    "category": "Fashion",
+    "stock": 200  
     },
 
     {
@@ -225,7 +267,8 @@ products = [
     "name": "Pasta",
     "price": 90,
     "image": "pasta.webp",
-    "category": "Grocery"
+    "category": "Grocery",
+    "stock": 200  
     },
 
     {
@@ -233,7 +276,8 @@ products = [
     "name": "Pistha",
     "price": 350,
     "image": "pistha.webp",
-    "category": "Dry Fruits"
+    "category": "Dry Fruits",
+    "stock": 200
     },
 
     {
@@ -241,7 +285,8 @@ products = [
     "name": "Designer Saree",
     "price": 1800,
     "image": "sarees.webp",
-    "category": "Fashion"
+    "category": "Fashion",
+    "stock": 200
     },
 
     {
@@ -249,7 +294,8 @@ products = [
     "name": "Spices",
     "price": 150,
     "image": "species.webp",
-    "category": "Spices"
+    "category": "Spices",
+    "stock": 200
     },
 
     {
@@ -257,7 +303,8 @@ products = [
     "name": "Sweet",
     "price": 200,
     "image": "sweet.webp",
-    "category": "Snacks"
+    "category": "Snacks",
+    "stock": 267
     },
 
     {
@@ -265,7 +312,8 @@ products = [
     "name": "Turmeric Powder",
     "price": 80,
     "image": "turmaric_powder.webp",
-    "category": "Spices"
+    "category": "Spices",
+    "stock": 267
     },
 
     {
@@ -273,14 +321,16 @@ products = [
     "name": "Walnuts",
     "price": 400,
     "image": "walnuts.webp",
-    "category": "Dry Fruits"
+    "category": "Dry Fruits",
+    "stock": 300
     },
     {
     "id": 31,
     "name": "Apple",
     "price": 120,
     "image": "apple.webp",
-    "category": "Fruits"
+    "category": "Fruits",
+    "stock": 267
     },
 
     {
@@ -288,7 +338,8 @@ products = [
     "name": "Banana",
     "price": 60,
     "image": "banana.webp",
-    "category": "Fruits"
+    "category": "Fruits",
+    "stock": 267
     },
 
     {
@@ -296,7 +347,8 @@ products = [
     "name": "Orange",
     "price": 90,
     "image": "orange.webp",
-    "category": "Fruits"
+    "category": "Fruits",
+    "stock": 267
     },
 
     {
@@ -304,7 +356,8 @@ products = [
     "name": "Potato",
     "price": 30,
     "image": "potato.webp",
-    "category": "Vegetables"
+    "category": "Vegetables",
+    "stock": 267
     },
 
     {
@@ -312,7 +365,8 @@ products = [
     "name": "Onion",
     "price": 40,
     "image": "onion.webp",
-    "category": "Vegetables"
+    "category": "Vegetables",
+    "stock": 267
     },
 
     {   
@@ -320,8 +374,10 @@ products = [
     "name": "Soap",
     "price": 35,
     "image": "soap.webp",
-    "category": "Personal Care"
-    }
+    "category": "Personal Care",
+    "stock": 267
+    },
+    
     ]
 
 
@@ -329,7 +385,78 @@ cart = []
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+
+    search = request.args.get('search', '')
+
+    category = request.args.get('category', '')
+
+    sort = request.args.get('sort', '')
+
+    filtered_products = products
+
+    if search:
+
+        filtered_products = []
+
+        for product in products:
+
+            if search.lower() in product['name'].lower():
+
+                filtered_products.append(product)
+
+    if category:
+
+        temp = []
+
+        for product in filtered_products:
+
+            if product['category'] == category:
+
+                temp.append(product)
+
+        filtered_products = temp
+    if sort == "low":
+         filtered_products.sort(
+            key=lambda x: x['price']
+        )
+
+    elif sort == "high":
+        filtered_products.sort(
+            key=lambda x: x['price'],
+            reverse=True
+        )
+
+    elif sort == "name":
+        filtered_products.sort(
+            key=lambda x: x['name']
+        )    
+
+    return render_template(
+        'index.html',
+        products=filtered_products
+    )
+
+    search = request.args.get('search')
+
+    if search:
+
+        filtered_products = []
+
+        for product in products:
+
+            if search.lower() in product['name'].lower():
+
+                filtered_products.append(product)
+
+        return render_template(
+            'index.html',
+            products=filtered_products
+        )
+
+    return render_template(
+        'index.html',
+        products=products
+    )
 
 # SIGNUP
 
@@ -429,6 +556,11 @@ def add_to_cart(id):
 
         if product['id'] == id:
 
+            if quantity > product['stock']:
+                return "Not enough stock available"
+
+            product['stock'] -= quantity
+
             item = {
                 "id": product['id'],
                 "name": product['name'],
@@ -479,14 +611,25 @@ def add_product():
 
     name = request.form['name']
     price = int(request.form['price'])
-    image = request.form['image']
+    image_file = request.files['image']
+
+    filename = secure_filename(
+        image_file.filename
+    )
+
+    image_file.save(
+        os.path.join(
+            app.config['UPLOAD_FOLDER'],
+            filename
+        )
+    )
     category = request.form['category']
 
     new_product = {
         "id": len(products) + 1,
         "name": name,
         "price": price,
-        "image": image,
+        "image": filename,
         "category": category
     }
 
@@ -528,6 +671,11 @@ def buy_now(id):
     for product in products:
 
         if product['id'] == id:
+
+            if quantity > product['stock']:
+                return "Not enough stock available"
+
+            product['stock'] -= quantity
 
             item = {
                 "id": product['id'],
@@ -694,10 +842,17 @@ def download_bill():
     )
 
 
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
 
-    app.run(host="0.0.0.0", port=5000)
+    app.run(debug=True)
+
+#####if __name__ == "__main__":#
+   # with app.app_context():#
+       # db.create_all()#
+
+   ####app.run(host="0.0.0.0", port=5000)#####
 
    
