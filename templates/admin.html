@@ -67,7 +67,8 @@
 
         <h2>Add Product</h2>
 
-        <form action="/add_product" method="POST">
+        <form action="/add_product" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" required>
 
             <input type="text" name="name" placeholder="Product Name" required>
 
@@ -76,6 +77,7 @@
             <input type="text" name="image" placeholder="images/Rice.jpg" required>
 
             <input type="text" name="category" placeholder="Category" required>
+            <input type="number" name="stock" placeholder="Stock" required>
 
             <br><br>
 

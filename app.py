@@ -17,6 +17,13 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "ramya"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+import os
+
+app.config['UPLOAD_FOLDER'] = os.path.join(
+    app.root_path,
+    'static',
+    'images'
+)
 
 db = SQLAlchemy(app)
 
@@ -617,6 +624,8 @@ def add_product():
         image_file.filename
     )
 
+    print(app.config['UPLOAD_FOLDER'])
+
     image_file.save(
         os.path.join(
             app.config['UPLOAD_FOLDER'],
@@ -625,12 +634,15 @@ def add_product():
     )
     category = request.form['category']
 
+    stock = int(request.form['stock'])
+
     new_product = {
         "id": len(products) + 1,
         "name": name,
         "price": price,
         "image": filename,
-        "category": category
+        "category": category,
+        "stock": stock
     }
 
     products.append(new_product)
