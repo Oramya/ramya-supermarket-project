@@ -332,6 +332,7 @@ products = [
     "stock": 300
     },
     {
+
     "id": 31,
     "name": "Apple",
     "price": 120,
@@ -383,6 +384,14 @@ products = [
     "image": "soap.webp",
     "category": "Personal Care",
     "stock": 267
+    },
+     {
+    "id": 37,
+    "name": "Mango",
+    "price": 400,
+    "image": "mango.webp",
+    "category": "Fruits",
+    "stock": 300
     },
     
     ]
@@ -855,16 +864,16 @@ def download_bill():
 
 
 
+#if __name__ == "__main__":#
+    #with app.app_context():#
+       ## db.create_all()#
+
+    ##app.run(debug=True)#
+
 if __name__ == "__main__":
     with app.app_context():
-        db.create_all()
+         db.create_all()
 
-    app.run(debug=True)
-
-#####if __name__ == "__main__":#
-   # with app.app_context():#
-       # db.create_all()#
-
-   ####app.run(host="0.0.0.0", port=5000)#####
+    app.run(host="0.0.0.0", port=5000)
 
    
