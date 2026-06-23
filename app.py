@@ -94,7 +94,7 @@ products = [
         "id": 4,
         "name": "Chocolate",
         "price": 60,
-        "image": "Chocolate.webp",
+        "image": "chocolate.webp",
         "category": "Snacks",
         "stock": 50
     },
@@ -372,7 +372,7 @@ products = [
     "id": 35,
     "name": "Onion",
     "price": 40,
-    "image": "onion.webp",
+    "image": "Onion.webp",
     "category": "Vegetables",
     "stock": 267
     },
