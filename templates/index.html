@@ -149,28 +149,80 @@
             </div>
         </div>
 
-        <!-- Chocolate -->
-
         <div class="card">
-            <img src="{{ url_for('static', filename='images/images/Chocolate.webp') }}" alt="Chocolate">
+            <img src="{{ url_for('static', filename='images/apple.webp') }}" alt="Apple">
 
             <div class="card-content">
-                <h3>Chocolate</h3>
-                <p class="price">₹60</p>
+                <h3>Apple</h3>
+                <p class="price">₹120/kg</p>
 
-                <form action="/add_to_cart/4" method="POST">
-
+                <form action="/add_to_cart/31" method="POST">
                     <input type="number" name="quantity" value="1" min="1">
-
                     <br><br>
 
                     <button type="submit" class="btn">
                         Add To Cart
                     </button>
-
                 </form>
 
-                <a href="/buy_now/4"></a>
+                <button class="btn">Buy Now</button>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/banana.webp') }}" alt="Banana">
+
+            <div class="card-content">
+                <h3>Banana</h3>
+                <p class="price">₹60/dozen</p>
+
+                <form action="/add_to_cart/32" method="POST">
+                    <input type="number" name="quantity" value="1" min="1">
+                    <br><br>
+
+                    <button type="submit" class="btn">
+                        Add To Cart
+                    </button>
+                </form>
+
+                <button class="btn">Buy Now</button>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/orange.webp') }}" alt="Orange">
+
+            <div class="card-content">
+                <h3>Orange</h3>
+                <p class="price">₹90/kg</p>
+
+                <form action="/add_to_cart/33" method="POST">
+                    <input type="number" name="quantity" value="1" min="1">
+                    <br><br>
+
+                    <button type="submit" class="btn">
+                        Add To Cart
+                    </button>
+                </form>
+
+                <button class="btn">Buy Now</button>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/potato.webp') }}" alt="Potato">
+
+            <div class="card-content">
+                <h3>Potato</h3>
+                <p class="price">₹30/kg</p>
+
+                <form action="/add_to_cart/34" method="POST">
+                    <input type="number" name="quantity" value="1" min="1">
+                    <br><br>
+
+                    <button type="submit" class="btn">
+                        Add To Cart
+                    </button>
+                </form>
+
+                <button class="btn">Buy Now</button>
             </div>
         </div>
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
