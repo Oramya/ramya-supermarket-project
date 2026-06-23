@@ -94,7 +94,7 @@ products = [
         "id": 4,
         "name": "Chocolate",
         "price": 60,
-        "image": "chocolate.webp",
+        "image": "Chocolate.webp",
         "category": "Snacks",
         "stock": 50
     },
