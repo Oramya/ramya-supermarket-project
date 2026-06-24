@@ -90,14 +90,6 @@ products = [
         "stock": 200   
     },
 
-    {
-        "id": 4,
-        "name": "Chocolate",
-        "price": 60,
-        "image": "Chocolate.webp",
-        "category": "Snacks",
-        "stock": 50
-    },
 
     {
     "id": 5,
