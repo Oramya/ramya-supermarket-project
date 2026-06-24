@@ -1,31 +1,18 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    color: white;
+    overflow-x: hidden;
 
     background: linear-gradient(-45deg,
-            #ff6b6b,
-            #6c5ce7,
-            #00cec9,
-            #fdcb6e);
+            #ff9a00,
+            #ff4d88,
+            #8a2be2,
+            #00c6ff);
 
     background-size: 400% 400%;
 
-    animation: gradientBG 12s ease infinite;
-}
-
-@keyframes gradientBG {
-
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+    animation: gradientMove 15s ease infinite;
 }
 
 /* NAVBAR */
@@ -72,7 +59,7 @@ nav a:hover {
 /* HERO SECTION */
 
 .hero {
-    background: linear-gradient(to right, #141e30, #243b55);
+    background: transparent;
     color: white;
     text-align: center;
     padding: 80px 20px;
@@ -200,4 +187,99 @@ footer {
     text-align: center;
     padding: 20px;
     margin-top: 40px;
+}
+
+@keyframes gradientMove {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+
+}
+
+.floating-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.floating-icons span {
+    position: absolute;
+    font-size: 35px;
+    opacity: 0.25;
+    animation: float 15s linear infinite;
+}
+
+.floating-icons span:nth-child(1) {
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.floating-icons span:nth-child(2) {
+    left: 15%;
+    animation-delay: 2s;
+}
+
+.floating-icons span:nth-child(3) {
+    left: 25%;
+    animation-delay: 4s;
+}
+
+.floating-icons span:nth-child(4) {
+    left: 35%;
+    animation-delay: 6s;
+}
+
+.floating-icons span:nth-child(5) {
+    left: 45%;
+    animation-delay: 8s;
+}
+
+.floating-icons span:nth-child(6) {
+    left: 55%;
+    animation-delay: 10s;
+}
+
+.floating-icons span:nth-child(7) {
+    left: 65%;
+    animation-delay: 12s;
+}
+
+.floating-icons span:nth-child(8) {
+    left: 75%;
+    animation-delay: 14s;
+}
+
+.floating-icons span:nth-child(9) {
+    left: 85%;
+    animation-delay: 16s;
+}
+
+.floating-icons span:nth-child(10) {
+    left: 95%;
+    animation-delay: 18s;
+}
+
+@keyframes float {
+
+    from {
+        transform: translateY(100vh);
+    }
+
+    to {
+        transform: translateY(-120px);
+    }
+
 }
